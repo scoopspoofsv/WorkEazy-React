@@ -10,21 +10,24 @@ const Accomodation = () => {
     const [fromValue, setFromValue] = useState(0);
     const [toValue, setToValue] = useState(0);
     const [data, setData] = useState(null);
+    const [headers, ] = useState({headers: {
+        "X-Requested-With": "XMLHttpRequest",
+    },});
 
     const history = useNavigate();
 
     useEffect(() => {
+        const fetchData = async () => {
+            let response =await axios.post('https://cors-anywhere.herokuapp.com/http://13.235.222.151:8180/workeazy/v1/bookings',{
+                bookingType: "ACCOMMODATION",
+                fromDate: "01-Jan-2022",
+                toDate: "31-May-2022",
+            }, headers);
+            response && setData(response);
+        }
         fetchData();
-    }, []);
+    }, [headers]);
 
-    const fetchData = async () => {
-        let response =await axios.post('http://13.235.222.151:8180/workeazy/v1/bookings',{
-            bookingType: "ACCOMMODATION",
-            fromDate: "01-Jan-2022",
-            toDate: "31-May-2022",
-        });
-        response && setData(response);
-    }
 
     const onDateChange = (value, type) => {
         type === 'from' && setFromValue(value);
@@ -33,16 +36,16 @@ const Accomodation = () => {
 
     useEffect(() => {
         const fetchDataChange = async () => {
-            let response =await axios.post('http://13.235.222.151:8180/workeazy/v1/bookings',{
+            let response =await axios.post('https://cors-anywhere.herokuapp.com/http://13.235.222.151:8180/workeazy/v1/bookings',{
                 bookingType: "ACCOMMODATION",
                 fromDate: moment(fromValue).format('DD-MMM-YYYY'),
                 toDate: moment(toValue).format('DD-MMM-YYYY'),
-            });
+            }, headers);
             response && setData(response);
         }
 
         fromValue!==0 && toValue !== 0 && fetchDataChange();
-    },[fromValue, toValue]);
+    },[fromValue, toValue, headers]);
 
     return (
         <div className="requests-main-window">

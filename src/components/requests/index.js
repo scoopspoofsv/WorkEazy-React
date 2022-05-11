@@ -11,7 +11,10 @@ const Requests = () => {
     }, []);
 
     const fetchData = async () => {
-        let response =await axios.get('http://13.235.222.151:8180/workeazy/v1/booking/requests',{
+        let response =await axios.get('https://cors-anywhere.herokuapp.com/http://13.235.222.151:8180/workeazy/v1/booking/requests',{
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+            },
         });
         response && setData(response);
     }
