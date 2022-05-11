@@ -1,15 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import SideNav from './components/general/SideNav';
 import Requests from './components/requests';
 import reportWebVitals from './reportWebVitals';
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-  Link,
   Routes
 } from "react-router-dom";
 import Seat from './components/requests/Seat';
