@@ -72,24 +72,26 @@ const Accomodation = () => {
                         </div>
                     </div>
                 </div>
-                {data && data.data && data.data.data && Array.isArray(data.data.data.accommodationRecords) ? <div className="table seats">
-                    <div className="heading row">
-                        <p>Name</p>
-                        <p>Email Address</p>
-                        <p>Contact Number</p>
-                        <p>From Date</p>
-                        <p>To Date</p>
-                    </div>
-                    {data.data.data.accommodationRecords.map((item) => (
-                        <div className="row">
-                            <p>{item.name}</p>
-                            <p>{item.email}</p>
-                            <p>{item.mobileNumber}</p>
-                            <p>{item.fromDate}</p>
-                            <p>{item.toDate}</p>
+                <div className="table-container">
+                    {data && data.data && data.data.data && Array.isArray(data.data.data.accommodationRecords) ? <div className="table seats">
+                        <div className="heading row">
+                            <p>Name</p>
+                            <p>Email Address</p>
+                            <p>Contact Number</p>
+                            <p>From Date</p>
+                            <p>To Date</p>
                         </div>
-                    ))}
-                </div> : <div className="nodata">No data found</div>}
+                        {data.data.data.accommodationRecords.map((item) => (
+                            <div className="row">
+                                <p>{item.name}</p>
+                                <p>{item.email}</p>
+                                <p>{item.mobileNumber}</p>
+                                <p>{item.fromDate}</p>
+                                <p>{item.toDate}</p>
+                            </div>
+                        ))}
+                    </div> : <div className="nodata">No data found</div>}
+                </div>
             </div>
         </div>
     );

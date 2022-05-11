@@ -70,28 +70,30 @@ const Transport = () => {
                         </div>
                     </div>
                 </div>
-                {data && data.data && data.data.data && Array.isArray(data.data.data.transportRecords) ?<div className="table seats">
-                    <div className="heading row">
-                        <p>Name</p>
-                        <p>Email Address</p>
-                        <p>Contact Number</p>
-                        <p>Pickup</p>
-                        <p>Return Journey</p>
-                        <p>Pickup Time</p>
-                        <p>Drop Time</p>
-                    </div>
-                    {data.data.data.transportRecords.map((item) => (
-                        <div className="row">
-                            <p>{item.name}</p>
-                            <p>{item.email}</p>
-                            <p>{item.mobileNumber}</p>
-                            <p>{item.pickUpLocation}</p>
-                            <p>{item.optReturnJourney ? 'Yes' : 'No'}</p>
-                            <p>{item.pickUptime}</p>
-                            <p>{item.returnTime}</p>
+                <div className="table-container">
+                    {data && data.data && data.data.data && Array.isArray(data.data.data.transportRecords) ?<div className="table seats">
+                        <div className="heading row">
+                            <p>Name</p>
+                            <p>Email Address</p>
+                            <p>Contact Number</p>
+                            <p>Pickup</p>
+                            <p>Return Journey</p>
+                            <p>Pickup Time</p>
+                            <p>Drop Time</p>
                         </div>
-                    ))}
-                </div> : <div className="nodata">No data found</div>}
+                        {data.data.data.transportRecords.map((item) => (
+                            <div className="row">
+                                <p>{item.name}</p>
+                                <p>{item.email}</p>
+                                <p>{item.mobileNumber}</p>
+                                <p>{item.pickUpLocation}</p>
+                                <p>{item.optReturnJourney ? 'Yes' : 'No'}</p>
+                                <p>{item.pickUptime}</p>
+                                <p>{item.returnTime}</p>
+                            </div>
+                        ))}
+                    </div> : <div className="nodata">No data found</div>}
+                </div>
             </div>
         </div>
     );

@@ -72,22 +72,24 @@ const Meal = () => {
                         </div>
                     </div>
                 </div>
-                {data && data.data && data.data.data && Array.isArray(data.data.data.mealRecords) ? <div className="table seats">
-                    <div className="heading row">
-                        <p>Name</p>
-                        <p>Email Address</p>
-                        <p>Contact Number</p>
-                        <p>No. of Meals</p>
-                    </div>
-                    {data.data.data.mealRecords.map((item) => (
-                        <div className="row">
-                            <p>{item.name}</p>
-                            <p>{item.email}</p>
-                            <p>{item.mobileNumber}</p>
-                            <p>{item.meals}</p>
+                <div className="table-container">
+                    {data && data.data && data.data.data && Array.isArray(data.data.data.mealRecords) ? <div className="table seats">
+                        <div className="heading row">
+                            <p>Name</p>
+                            <p>Email Address</p>
+                            <p>Contact Number</p>
+                            <p>No. of Meals</p>
                         </div>
-                    ))}
-                </div> : <div className="nodata">No data found</div>}
+                        {data.data.data.mealRecords.map((item) => (
+                            <div className="row">
+                                <p>{item.name}</p>
+                                <p>{item.email}</p>
+                                <p>{item.mobileNumber}</p>
+                                <p>{item.meals}</p>
+                            </div>
+                        ))}
+                    </div> : <div className="nodata">No data found</div>}
+                </div>
             </div>
         </div>
     );

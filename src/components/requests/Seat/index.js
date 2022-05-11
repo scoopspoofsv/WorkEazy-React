@@ -70,26 +70,28 @@ const Seat = () => {
                         </div>
                     </div>
                 </div>
-                {data && data.data && data.data.data && Array.isArray(data.data.data.seatAvailabilityRecords) ? <div className="table seats">
-                    <div className="heading row">
-                        <p>Name</p>
-                        <p>Email Address</p>
-                        <p>Contact Number</p>
-                        <p>No. of Seats</p>
-                        <p>Floor</p>
-                        <p>Zone</p>
-                    </div>
-                    {data.data.data.seatAvailabilityRecords.map((item) => (
-                        <div className="row">
-                            <p>{item.name}</p>
-                            <p>{item.email}</p>
-                            <p>{item.mobileNumber}</p>
-                            <p>{item.seats}</p>
-                            <p>{item.floor}</p>
-                            <p>{item.zone}</p>
+                <div className="table-container">
+                    {data && data.data && data.data.data && Array.isArray(data.data.data.seatAvailabilityRecords) ? <div className="table seats">
+                        <div className="heading row">
+                            <p>Name</p>
+                            <p>Email Address</p>
+                            <p>Contact Number</p>
+                            <p>No. of Seats</p>
+                            <p>Floor</p>
+                            <p>Zone</p>
                         </div>
-                    ))}
-                </div> : <div className="nodata">No data found</div>}
+                        {data.data.data.seatAvailabilityRecords.map((item) => (
+                            <div className="row">
+                                <p>{item.name}</p>
+                                <p>{item.email}</p>
+                                <p>{item.mobileNumber}</p>
+                                <p>{item.seats}</p>
+                                <p>{item.floor}</p>
+                                <p>{item.zone}</p>
+                            </div>
+                        ))}
+                    </div> : <div className="nodata">No data found</div>}
+                </div>
             </div>
         </div>
     );

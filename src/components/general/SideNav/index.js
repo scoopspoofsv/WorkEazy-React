@@ -1,18 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import './style.scss';
 import logo from '../../../assets/images/logo-svg.png';
 import adminIcon from '../../../assets/images/admin-icon.jpeg';
 
 const SideNav = () => {
+
+    const [open, setOpen] = useState(false);
+
     return(
-        <div className="side-nav">
+        <div className={open ? 'side-nav' : 'side-nav closed'}>
             <div class="logo">
                 <img src={logo} alt="logo" />
             </div>
             <div className="links">
                 {/* <Link to="dashboard"><i class="fa-solid fa-table-columns"></i> Dashboard</Link> */}
-                <Link to="requests" className="active"><i class="fa-solid fa-check-to-slot"></i> Requests</Link>
+                <Link to="/" className="active"><i class="fa-solid fa-check-to-slot"></i> Requests</Link>
             </div>
             <div className="footer">
                 <div className="admin">
@@ -24,6 +27,9 @@ const SideNav = () => {
                         <div className="designation">Admin</div>
                     </div>
                 </div>
+            </div>
+            <div className="hamburger" onClick={() => setOpen(!open)}>
+                <i class="fa-solid fa-bars"></i>
             </div>
         </div>
     );
