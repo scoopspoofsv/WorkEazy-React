@@ -2,12 +2,15 @@ import React, {useState, useEffect} from "react";
 import DatePicker from 'react-date-picker';
 import axios from "axios";
 import moment from "moment";
+import {useNavigate} from "react-router-dom";
 
 const Meal = () => {
 
     const [fromValue, setFromValue] = useState(0);
     const [toValue, setToValue] = useState(0);
     const [data, setData] = useState(null);
+
+    const history = useNavigate();
 
     useEffect(() => {
         fetchData();
@@ -22,23 +25,24 @@ const Meal = () => {
         response && setData(response);
     }
 
-    const fetchDataChange = async () => {
-        let response =await axios.post('http://13.235.222.151:8180/workeazy/v1/bookings',{
-            bookingType: "MEAL",
-            fromDate: moment(fromValue).format('DD-MMM-YYYY'),
-            toDate: moment(toValue).format('DD-MMM-YYYY'),
-        });
-        response && setData(response);
-    }
-
     const onDateChange = (value, type) => {
         type === 'from' && setFromValue(value);
         type === 'to' && setToValue(value);
     }
 
     useEffect(() => {
+
+
+        const fetchDataChange = async () => {
+            let response =await axios.post('http://13.235.222.151:8180/workeazy/v1/bookings',{
+                bookingType: "MEAL",
+                fromDate: moment(fromValue).format('DD-MMM-YYYY'),
+                toDate: moment(toValue).format('DD-MMM-YYYY'),
+            });
+            response && setData(response);
+        }
         fromValue!==0 && toValue !== 0 && fetchDataChange();
-    },[toValue]);
+    },[fromValue, toValue]);
 
     return (
         <div className="requests-main-window">
@@ -47,7 +51,7 @@ const Meal = () => {
             </div>
             <div className="seat-requests">
                 <div className="title">
-                    <a href="javascript:history.back()">
+                <a href="/#" onClick={history.goBack}>
                         <i className="fa-solid fa-arrow-left back"></i>
                     </a>
                     Meal Booking Requests
