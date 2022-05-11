@@ -7,8 +7,8 @@ import moment from "moment";
 
 const Accomodation = () => {
 
-    const [fromValue, setFromValue] = useState(moment().subtract(4, 'months')._d);
-    const [toValue, setToValue] = useState(moment()._d);
+    const [fromValue, setFromValue] = useState(moment().startOf('month').subtract(4, 'months')._d);
+    const [toValue, setToValue] = useState(moment().endOf('month')._d);
     const [data, setData] = useState(null);
     const [headers, ] = useState({headers: {
         "X-Requested-With": "XMLHttpRequest",
@@ -38,16 +38,14 @@ const Accomodation = () => {
     return (
         <div className="requests-main-window">
             <div className="header">
-                <h3>Requests</h3>
+                <h3 >Requests</h3><span> / </span>
+                <p>Accomodation Booking Requests</p>
             </div>
             <div className="seat-requests">
-                <div className="title">
-                    <a href="/#" onClick={history.goBack}>
-                        <i className="fa-solid fa-arrow-left back"></i>
-                    </a>
-                    Accomodation Booking Requests
-                </div>
                 <div className="date-pickers">
+                    <a href="/#" className="back-button" onClick={history.goBack}>
+                        <i className="fa-solid fa-arrow-left back"></i> Back
+                    </a>
                     <p>Select Date:</p>
                     <div className="date-container">
                         <div className="from">
@@ -61,7 +59,7 @@ const Accomodation = () => {
                     </div>
                 </div>
                 <div className="table-container">
-                    {data && data.data && data.data.data && Array.isArray(data.data.data.accommodationRecords) ? <div className="table seats">
+                    {data && data.data && data.data.data && Array.isArray(data.data.data.accommodationRecords) && data.data.data.accommodationRecords.length > 0 ? <div className="table seats">
                         <div className="heading row">
                             <p>Name</p>
                             <p>Email Address</p>

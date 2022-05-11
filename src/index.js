@@ -14,11 +14,15 @@ import Meal from './components/requests/Meal';
 import Transport from './components/requests/Transport';
 import Accomodation from './components/requests/Accomodation';
 import './scss/main.scss';
+import bgImage from './assets/images/backgroundimage.webp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
     <SideNav />
+    <div className='background-image'>
+      <img src={bgImage} alt="bgImage" />
+    </div>
     <div className="App">
       <Routes>
         {/* <Route path="/" element={<App />} /> */}
