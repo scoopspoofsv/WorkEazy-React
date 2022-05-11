@@ -5,8 +5,8 @@ import moment from "moment";
 import {useNavigate} from "react-router-dom";
 
 const Seat = () => {
-    const [fromValue, setFromValue] = useState(moment().subtract(4, 'months'));
-    const [toValue, setToValue] = useState(moment());
+    const [fromValue, setFromValue] = useState(moment().subtract(4, 'months')._d);
+    const [toValue, setToValue] = useState(moment()._d);
     const [data, setData] = useState(null);
     const [headers, ] = useState({headers: {
         "X-Requested-With": "XMLHttpRequest",
