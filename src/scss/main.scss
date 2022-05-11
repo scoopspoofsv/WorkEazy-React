@@ -1,0 +1,264 @@
+@import 'var';
+
+// Reset
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    line-height: 1.6;
+    background: #fff;
+    
+}
+
+a{
+    text-decoration: none;
+    color: $dark-color;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    width: 100%;
+}
+
+#root{
+    display: flex;
+    justify-content: center;
+}
+
+.side-nav{
+    width: 18%;
+    border-right: 2px solid $medium-color-1;
+    min-height: 100vh;
+    position: relative;
+    .logo{
+        padding: 20px 60px 12px 20px;
+        background-color: $primary-color;
+        img{
+            max-width: 100px;
+        }
+        margin-bottom: 20px;
+    }
+    .links{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        align-self: start;
+        a{
+            padding: 15px 25px;
+            width: 100%;
+            color: $dark-color !important;
+            &.active{
+                background-color: $medium-color-1;
+                font-weight: 600;
+                color: $primary-color !important;
+                position: relative;
+                &::after{
+                    content: '';
+                    position: absolute;
+                    width: 2px;
+                    height: 25px;
+                    background-color: $primary-color;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 0;
+                }
+            }
+            i{
+                margin-right: 10px;
+            }
+        }
+    }
+    .footer{
+        position: absolute;
+        bottom: 20px;
+        background-color: $medium-color-1;
+        width: 100%;
+        padding: 10px 0;
+        &::after{
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 45px;
+            background-color: $primary-color;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0;
+        }
+        .admin{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+        .icon{
+            width: 50px;
+            border-radius: 50%;
+            img{
+                border: 1px solid $grey-text;
+                border-radius: 50%;
+            }
+        }
+        .details{
+            width: 70%;
+            .name{
+                font-weight: bold;
+            }
+            .designation{
+                font-size: 14px;
+                color: $grey-text;
+            }
+        }
+    }
+}
+.nodata{
+    margin-top: 20px;
+    font-size: 20px;
+    color: $grey-text;
+}
+
+.App{
+    width: 82%;
+    .header{
+        padding: 20px !important;
+        margin: 0;
+        font-size: unset;
+        width: 100%;
+        border-bottom: 2px solid $medium-color-1;
+        line-height: 1;
+        h3{
+            font-size: 20px;
+            margin: 0;
+            font-weight: bold;
+            text-align: left;
+        }
+    }
+    .all-options{
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 20px;
+        li{
+            width: 50%;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            a{
+                width: 90%;
+                background-color: $primary-color;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: $light-color;
+                padding: 30px 20px;
+                border-radius: 10px;
+                font-weight: bold;
+                &:hover{
+                    color: $light-color;
+                    text-decoration: none;
+                }
+                .counter{
+                    color: $dark-color;
+                    padding: 3px;
+                    width: 25px;
+                    height: 25px;
+                    background-color: $light-color;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+    .seat-requests{
+        padding: 20px;
+        .title{
+            text-align: left;
+            .back{
+                border: 1px solid;
+                padding: 3px;
+                border-radius: 50%;
+                margin-right: 10px;
+                color: $dark-color !important;
+            }
+            margin-bottom: 10px;
+        }
+        .date-pickers{
+            p{
+                font-weight: bold;
+                margin: 5px 0;
+                text-align: left;
+            }
+            .calendar-picker{
+                width: 300px !important;
+                border-radius: 10px;
+                input {
+                    border-radius: 10px;
+                    background-color: $medium-color-1;
+                }
+            }
+            .date-container{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                .from{
+                    margin-right: 20px;
+                }
+            }
+        }
+        .table{
+            margin-top: 20px;
+            .row{
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                &.heading{
+                    background-color: $primary-color !important;
+                    border-radius: 10px 10px 0 0;
+                    p{
+                        color: $light-color !important;
+                        font-size: 16px !important;
+                        font-weight: bold;
+                    }
+                }
+                p{
+                    margin: 0 !important;
+                    color: $grey-text;
+                    font-size: 14px;
+                    overflow: hidden;
+                }
+                background-color: $medium-color-1;
+                &:nth-child(2n+1) {
+                    background-color: $medium-color-2;
+                }
+            }
+            &.seats{
+                p{
+                    width: 15%;
+                    &:nth-child(2){
+                        width: 25%;
+                    }
+                }
+            }
+            &.accomodation{
+                p{
+                    width: 15%;
+                    &:nth-child(2){
+                        width: 22%;
+                    }
+                    &:nth-child(5), &:nth-child(6){
+                        width: 12%;
+                    }
+                }
+            }
+        }
+    }
+}
