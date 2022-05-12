@@ -78,7 +78,7 @@ const Transport = () => {
                 </div>
                 {loading && <LoadingShimmer />}
                 <div className="table-container">
-                    {data && data.data && data.data.data && Array.isArray(data.data.data.transportRecords) && data.data.data.transportRecords.length > 0 &&<div className="table transport">
+                    {!loading && !error.error && data && data.data && data.data.data && data.data.data.transportRecords && <div className="table transport">
                         <div className="heading row">
                             <p>Name</p>
                             <p>Email Address</p>
@@ -88,8 +88,8 @@ const Transport = () => {
                             <p>Pickup Time</p>
                             <p>Drop Time</p>
                         </div>
-                        {data.data.data.transportRecords.map((item) => (
-                            <div className="row">
+                        {data.data.data.transportRecords.map((item, index) => (
+                            <div className="row" key={index}>
                                 <p>{item.name}</p>
                                 <p>{item.email}</p>
                                 <p>{item.mobileNumber}</p>
@@ -100,8 +100,8 @@ const Transport = () => {
                             </div>
                         ))}
                     </div>}
-                    {error.error && <div className="nodata">An error occured in fetching data : {error.message}</div>}
                 </div>
+                {error.error && <div className="nodata">An error occured in fetching data : {error.message}</div>}
             </div>
         </div>
     );

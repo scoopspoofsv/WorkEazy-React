@@ -78,7 +78,7 @@ const Accomodation = () => {
                 </div>
                 {loading && <LoadingShimmer />}
                 <div className="table-container">
-                    {data && data.data && data.data.data && Array.isArray(data.data.data.accommodationRecords) && data.data.data.accommodationRecords.length > 0 && <div className="table seats">
+                    {!loading && !error.error && data && data.data && data.data.data &&data.data.data.accommodationRecords && <div className="table seats">
                         <div className="heading row">
                             <p>Name</p>
                             <p>Email Address</p>
@@ -86,8 +86,8 @@ const Accomodation = () => {
                             <p>From Date</p>
                             <p>To Date</p>
                         </div>
-                        {data.data.data.accommodationRecords.map((item) => (
-                            <div className="row">
+                        {data.data.data.accommodationRecords.map((item, index) => (
+                            <div className="row" key={index}>
                                 <p>{item.name}</p>
                                 <p>{item.email}</p>
                                 <p>{item.mobileNumber}</p>
@@ -96,8 +96,8 @@ const Accomodation = () => {
                             </div>
                         ))}
                     </div>}
-                    {error.error && <div className="nodata">An error occured in fetching data : {error.message}</div>}
                 </div>
+                {error.error && <div className="nodata">An error occured in fetching data : {error.message}</div>}
             </div>
         </div>
     );
