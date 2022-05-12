@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import DatePicker from 'react-date-picker';
 import axios from "axios";
 import moment from "moment";
-import {useNavigate} from "react-router-dom";
+import LoadingShimmer from "../../general/LoadingShimmer";
 
 const Seat = () => {
     const [fromValue, setFromValue] = useState(moment().startOf('month').subtract(4, 'months')._d);
@@ -11,9 +11,11 @@ const Seat = () => {
     const [headers, ] = useState({headers: {
         "X-Requested-With": "XMLHttpRequest",
     },});
-
-    const history = useNavigate();
-
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState({
+        error: false,
+        message: '',
+    });
 
     const onDateChange = (value, type) => {
         type === 'from' && setFromValue(value);
@@ -22,12 +24,25 @@ const Seat = () => {
 
     useEffect(() => {
         const fetchDataChange = async () => {
-            let response =await axios.post('https://cors-anywhere.herokuapp.com/http://13.235.222.151:8180/workeazy/v1/bookings',{
-                bookingType: "SEAT",
-                fromDate: moment(fromValue).format('DD-MMM-YYYY'),
-                toDate: moment(toValue).format('DD-MMM-YYYY'),
-            }, headers);
-            response && setData(response);
+            setLoading(true)
+            try {
+                const response = await axios.post('https://cors-anywhere.herokuapp.com/http://13.235.222.151:8180/workeazy/v1/bookings',{
+                    bookingType: "SEAT",
+                    fromDate: moment(fromValue).format('DD-MMM-YYYY'),
+                    toDate: moment(toValue).format('DD-MMM-YYYY'),
+                }, headers);
+                // wait for json to be ready
+                response && setData(response);
+                setLoading(false);
+                // console.log(product.data.attributes)
+              } catch (e) {
+                  console.log(e);
+                setLoading(false);
+                setError({
+                    error: true,
+                    message: e.message,
+                });
+              }
         }
 
         fromValue!==0 && toValue !== 0 && fetchDataChange();
@@ -35,29 +50,22 @@ const Seat = () => {
 
     return (
         <div className="requests-main-window">
-            <div className="header">
-                <h3 >Requests</h3><span> / </span>
-                <p>Seat Booking Requests</p>
-            </div>
             <div className="seat-requests">
                 <div className="date-pickers">
-                    <a href="/#" className="back-button" onClick={history.goBack}>
-                        <i className="fa-solid fa-arrow-left back"></i> Back
-                    </a>
-                    <p>Select Date:</p>
                     <div className="date-container">
                         <div className="from">
-                            <p>From :</p>
-                            <DatePicker onChange={(value) => onDateChange(value, 'from')} value={fromValue} format={'dd-MM-y'} />
+                            <p>From Date:</p>
+                            <DatePicker onChange={(value) => onDateChange(value, 'from')} value={fromValue} format={'dd-MM-y'} className="date-inputs"/>
                         </div>
                         <div className="from">
-                            <p>To :</p>
-                            <DatePicker onChange={(value) => onDateChange(value, 'to')} value={toValue} format={'dd-MM-y'} />
+                            <p>To Date:</p>
+                            <DatePicker onChange={(value) => onDateChange(value, 'to')} value={toValue} format={'dd-MM-y'} className="date-inputs"/>
                         </div>
                     </div>
                 </div>
+                {loading && <LoadingShimmer />}
                 <div className="table-container">
-                    {data && data.data && data.data.data && Array.isArray(data.data.data.seatAvailabilityRecords) && data.data.data.seatAvailabilityRecords.length > 0 ? <div className="table seats">
+                    {data && data.data && data.data.data && Array.isArray(data.data.data.seatAvailabilityRecords) && data.data.data.seatAvailabilityRecords.length > 0 && <div className="table seats">
                         <div className="heading row">
                             <p>Name</p>
                             <p>Email Address</p>
@@ -66,8 +74,8 @@ const Seat = () => {
                             <p>Floor</p>
                             <p>Zone</p>
                         </div>
-                        {data.data.data.seatAvailabilityRecords.map((item) => (
-                            <div className="row">
+                        {data.data.data.seatAvailabilityRecords.map((item,index) => (
+                            <div className="row" key={index}>
                                 <p>{item.name}</p>
                                 <p>{item.email}</p>
                                 <p>{item.mobileNumber}</p>
@@ -76,7 +84,8 @@ const Seat = () => {
                                 <p>{item.zone}</p>
                             </div>
                         ))}
-                    </div> : <div className="nodata">No data found</div>}
+                    </div>}
+                    {error.error && <div className="nodata">An error occured in fetching data : {error.message}</div>}
                 </div>
             </div>
         </div>

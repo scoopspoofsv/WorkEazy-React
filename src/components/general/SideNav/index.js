@@ -10,12 +10,12 @@ const SideNav = () => {
 
     return(
         <div className={open ? 'side-nav' : 'side-nav closed'}>
-            <div class="logo">
+            <div className="logo">
                 <img src={logo} alt="logo" />
             </div>
             <div className="links">
                 {/* <Link to="dashboard"><i class="fa-solid fa-table-columns"></i> Dashboard</Link> */}
-                <Link to="/" className="active"><i class="fa-solid fa-check-to-slot"></i> Requests</Link>
+                <Link to="/" className="active"><i className="fa-solid fa-check-to-slot"></i> Requests</Link>
             </div>
             <div className="footer">
                 <div className="admin">
@@ -29,7 +29,7 @@ const SideNav = () => {
                 </div>
             </div>
             <div className="hamburger" onClick={() => setOpen(!open)}>
-                <i class="fa-solid fa-bars"></i>
+                <i className="fa-solid fa-bars"></i>
             </div>
         </div>
     );

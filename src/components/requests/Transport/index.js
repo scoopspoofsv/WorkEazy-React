@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import DatePicker from 'react-date-picker';
 import axios from "axios";
 import moment from "moment";
-import {useNavigate} from "react-router-dom";
+import LoadingShimmer from "../../general/LoadingShimmer";
 
 const Transport = () => {
 
@@ -12,8 +12,11 @@ const Transport = () => {
     const [headers, ] = useState({headers: {
         "X-Requested-With": "XMLHttpRequest",
     },});
-
-    const history = useNavigate();
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState({
+        error: false,
+        message: '',
+    });
 
 
     const onDateChange = (value, type) => {
@@ -33,31 +36,49 @@ const Transport = () => {
         fromValue!==0 && toValue !== 0 && fetchDataChange();
     },[fromValue, toValue, headers]);
 
+    useEffect(() => {
+        const fetchDataChange = async () => {
+            setLoading(true)
+            try {
+                const response = await axios.post('https://cors-anywhere.herokuapp.com/http://13.235.222.151:8180/workeazy/v1/bookings',{
+                    bookingType: "SEAT",
+                    fromDate: moment(fromValue).format('DD-MMM-YYYY'),
+                    toDate: moment(toValue).format('DD-MMM-YYYY'),
+                }, headers);
+                // wait for json to be ready
+                response && setData(response);
+                setLoading(false);
+                // console.log(product.data.attributes)
+              } catch (e) {
+                setLoading(false);
+                setError({
+                    error: true,
+                    message: e.message,
+                });
+              }
+        }
+
+        fromValue!==0 && toValue !== 0 && fetchDataChange();
+    },[fromValue, toValue, headers]);
+
     return (
         <div className="requests-main-window">
-            <div className="header">
-                <h3 >Requests</h3><span> / </span>
-                <p>Transport Booking Requests</p>
-            </div>
             <div className="seat-requests">
                 <div className="date-pickers">
-                    <a href="/#" className="back-button" onClick={history.goBack}>
-                        <i className="fa-solid fa-arrow-left back"></i> Back
-                    </a>
-                    <p>Select Date:</p>
                     <div className="date-container">
-                        <div className="from">
-                            <p>From :</p>
-                            <DatePicker onChange={(value) => onDateChange(value, 'from')} value={fromValue} format={'dd-MM-y'} />
+                    <div className="from">
+                            <p>From Date:</p>
+                            <DatePicker onChange={(value) => onDateChange(value, 'from')} value={fromValue} format={'dd-MM-y'} className="date-inputs"/>
                         </div>
                         <div className="from">
-                            <p>To :</p>
-                            <DatePicker onChange={(value) => onDateChange(value, 'to')} value={toValue} format={'dd-MM-y'} />
+                            <p>To Date:</p>
+                            <DatePicker onChange={(value) => onDateChange(value, 'to')} value={toValue} format={'dd-MM-y'} className="date-inputs"/>
                         </div>
                     </div>
                 </div>
+                {loading && <LoadingShimmer />}
                 <div className="table-container">
-                    {data && data.data && data.data.data && Array.isArray(data.data.data.transportRecords) && data.data.data.transportRecords.length > 0 ?<div className="table transport">
+                    {data && data.data && data.data.data && Array.isArray(data.data.data.transportRecords) && data.data.data.transportRecords.length > 0 &&<div className="table transport">
                         <div className="heading row">
                             <p>Name</p>
                             <p>Email Address</p>
@@ -78,7 +99,8 @@ const Transport = () => {
                                 <p>{item.returnTime}</p>
                             </div>
                         ))}
-                    </div> : <div className="nodata">No data found</div>}
+                    </div>}
+                    {error.error && <div className="nodata">An error occured in fetching data : {error.message}</div>}
                 </div>
             </div>
         </div>

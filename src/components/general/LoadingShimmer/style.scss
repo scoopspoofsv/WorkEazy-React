@@ -1,0 +1,49 @@
+.loading-screen{
+    .br {
+        border-radius: 8px;  
+    }
+    .w80 {
+        width: 80%;
+    }
+    .card {
+    border: 2px solid #fff;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    padding: 30px 40px;
+    width: 100%;
+    margin: 50px auto;
+    background-color: #fff;
+    }
+    .profilePic {
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+    }
+    .comment {
+    height: 10px;
+    background: #777;
+    margin-top: 20px;
+    }
+    .wrapper {
+        width: 0px;
+        animation: fullView 0.5s forwards linear;
+    }
+    
+    @keyframes fullView {
+        100% {
+            width: 100%;
+        }
+    }
+    .animate {
+        animation : shimmer 2s infinite;
+        background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+        background-size: 1000px 100%;
+    }
+    @keyframes shimmer {
+        0% {
+          background-position: -1000px 0;
+        }
+        100% {
+          background-position: 1000px 0;
+        }
+    }
+}

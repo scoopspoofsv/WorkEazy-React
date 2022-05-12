@@ -6,6 +6,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    &:focus, &:hover{
+        outline: none;
+    }
 }
 
 body {
@@ -134,9 +137,21 @@ img {
     }
 }
 .nodata{
-    margin-top: 20px;
-    font-size: 20px;
+    margin-top: 50px;
+    font-size: 18px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: $light-color;
     color: $grey-text;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    &::before{
+        content: '\f071';
+        font-family: Fontawesome;
+        margin-right: 10px;
+        color: $dark-color;
+    }
 }
 .background-image{
     position: absolute;
@@ -196,19 +211,23 @@ img {
             margin-bottom: 10px;
         }
     }
-    .all-options{
+    .all-options, ul.react-tabs__tab-list{
         display: flex;
         flex-wrap: wrap;
-        padding-top: 100px;
+        padding-top: 40px;
+        // position: sticky;
+        // z-index: 3;
+        // top: 25px;
         li{
-            width: 50%;
+            width: 25%;
             padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            a{
+            div{
+                cursor: pointer;
                 box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-                width: 80%;
+                width: 95%;
                 background-color: #fffa;
                 // background-color: $primary-color;
                 // background: rgb(2,0,36);
@@ -217,12 +236,12 @@ img {
                 justify-content: space-between;
                 align-items: center;
                 color: $dark-color;
-                padding: 60px 20px;
+                padding: 10px 20px;
                 border-radius: 10px;
                 font-weight: bold;
-                font-size: 18px;
+                font-size: 14px;
                 transition: all 0.5s ease;
-                &:hover{
+                &:hover, &.active{
                     color: $light-color;
                     text-decoration: none;
                     // background: rgb(2,0,36);
@@ -252,12 +271,9 @@ img {
     .seat-requests{
         padding: 20px;
         .date-pickers{
-            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
             border-radius: 10px;
-            padding: 15px;
-            background-color: #fffa;
             position: relative;
-            margin-bottom: 45px;
+            margin-bottom: 25px;
             margin-top: 15px;
             .back-button{
                 position: absolute;
@@ -282,8 +298,8 @@ img {
             }
             p{
                 font-weight: bold;
-                margin: 5px 0;
                 text-align: left;
+                padding-left: 10px;
             }
             .calendar-picker{
                 width: 300px !important;
@@ -295,16 +311,46 @@ img {
             }
             .date-container{
                 display: flex;
-                justify-content: flex-start;
+                justify-content: center;
                 align-items: center;
+                padding-left: 30px;
+                flex-wrap: wrap;
                 .from{
-                    margin-right: 40px;
+                    margin-right: 34px;
+                    width: 23%;
+                    color: $dark-color;
+                    position: relative;
+                    p{
+                        z-index: 2;
+                        position: absolute;
+                        top: 5px;
+                        left: 5px;
+                        font-size: 14px;
+                    }
+                    .date-inputs{
+                        z-index: 1;
+                        border-radius: 10px;
+                        background-color: #fffa;
+                        // background-color: #fffa;
+                        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                        border: none;
+                        width: 100%;
+                        padding: 12px;
+                        padding-top: 38px;
+                        .react-date-picker__wrapper{
+                            border: none;
+                        }
+                        input{
+                            pointer-events:none;
+                        }
+                    }
                 }
             }
         }
         .table{
             box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
             border-radius: 10px;
+            margin-bottom: 20px;
             .row{
                 display: flex;
                 justify-content: space-between;

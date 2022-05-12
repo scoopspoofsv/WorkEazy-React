@@ -1,10 +1,16 @@
 import React, {useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+// import 'react-tabs/style/react-tabs.css';
+import Seat from './Seat';
+import Meal from './Meal';
+import Transport from './Transport';
+import Accomodation from './Accomodation';
 import axios from "axios";
 
 const Requests = () => {
 
     const [data, setData] = useState(null);
+    const [tabIndex, setTabIndex] = useState(0);
 
     useEffect(() =>{
         fetchData();
@@ -25,32 +31,46 @@ const Requests = () => {
                 <div className="header">
                     <h3>Requests</h3>
                 </div>
-                <ul className="all-options">
-                    <li>
-                        <Link to="seats">
-                            Seat Booking Requests
-                            <div className="counter">{data && data.data && data.data.data && data.data.data.seatRequests}</div>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="meal">
-                            Meal Booking Requests
-                            <div className="counter">{data && data.data && data.data.data && data.data.data.mealRequests}</div>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="transport">
-                            Transport Booking Requests
-                            <div className="counter">{data && data.data && data.data.data && data.data.data.transportRequests}</div>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="accomodation">
-                            Accomodation Booking Requests
-                            <div className="counter">{data && data.data && data.data.data && data.data.data.accommodationRequests}</div>
-                        </Link>
-                    </li>
-                </ul>
+                <Tabs onSelect={(index) => setTabIndex(index)}>
+                    <TabList>
+                        <Tab>
+                            <div className={tabIndex === 0 ? 'active' : ''}>
+                                Seat Booking
+                                <div className="counter">{data && data.data && data.data.data && data.data.data.seatRequests}</div>
+                            </div>
+                        </Tab>
+                        <Tab>
+                            <div className={tabIndex === 1 ? 'active' : ''}>
+                                Meal Booking
+                                <div className="counter">{data && data.data && data.data.data && data.data.data.mealRequests}</div>
+                            </div>
+                        </Tab>
+                        <Tab>
+                            <div className={tabIndex === 2 ? 'active' : ''}>
+                                Transport Booking
+                                <div className="counter">{data && data.data && data.data.data && data.data.data.transportRequests}</div>
+                            </div>
+                        </Tab>
+                        <Tab>
+                            <div className={tabIndex === 3 ? 'active' : ''}>
+                                Accomodation Booking
+                                <div className="counter">{data && data.data && data.data.data && data.data.data.accommodationRequests}</div>
+                            </div>
+                        </Tab>
+                    </TabList>
+                    <TabPanel>
+                        <Seat />
+                    </TabPanel>
+                    <TabPanel>
+                        <Meal />
+                    </TabPanel>
+                    <TabPanel>
+                        <Transport />
+                    </TabPanel>
+                    <TabPanel>
+                        <Accomodation />
+                    </TabPanel>
+                </Tabs>
             </div>
         </main>
     );
