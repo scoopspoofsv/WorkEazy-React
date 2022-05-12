@@ -38,7 +38,11 @@ const Accomodation = () => {
 
     useEffect(() => {
         const fetchDataChange = async () => {
-            setLoading(true)
+            setLoading(true);
+            setError({
+                error: false,
+                message: '',
+            });
             try {
                 const response = await axios.post('https://cors-anywhere.herokuapp.com/http://13.235.222.151:8180/workeazy/v1/bookings',{
                     bookingType: "SEAT",
