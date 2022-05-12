@@ -82,7 +82,7 @@ const Transport = () => {
                 </div>
                 {loading && <LoadingShimmer />}
                 <div className="table-container">
-                    {!loading && !error.error && data && data.data && data.data.data && data.data.data.transportRecords && <div className="table transport">
+                    {!loading && !error.error && data && data.data && data.data.data && data.data.data.transportRecords && data.data.data.transportRecords.length > 0 ? <div className="table transport">
                         <div className="heading row">
                             <p>Name</p>
                             <p>Email Address</p>
@@ -103,7 +103,7 @@ const Transport = () => {
                                 <p>{item.returnTime}</p>
                             </div>
                         ))}
-                    </div>}
+                    </div> : <div className="nodata">No data found</div>}
                 </div>
                 {error.error && <div className="nodata">An error occured in fetching data : {error.message}</div>}
             </div>
