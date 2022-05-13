@@ -23,7 +23,6 @@ const Transport = () => {
         type === 'from' && setFromValue(value);
         type === 'to' && setToValue(value);
     }
-
     useEffect(() => {
         const fetchDataChange = async () => {
             setLoading(true);
@@ -33,7 +32,7 @@ const Transport = () => {
             });
             try {
                 const response = await axios.post('https://cors-anywhere.herokuapp.com/http://13.235.222.151:8180/workeazy/v1/bookings',{
-                    bookingType: "SEAT",
+                    bookingType: "TRANSPORT",
                     fromDate: moment(fromValue).format('DD-MMM-YYYY'),
                     toDate: moment(toValue).format('DD-MMM-YYYY'),
                 }, headers);
