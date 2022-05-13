@@ -26,18 +26,6 @@ const Transport = () => {
 
     useEffect(() => {
         const fetchDataChange = async () => {
-            let response =await axios.post('https://cors-anywhere.herokuapp.com/http://13.235.222.151:8180/workeazy/v1/bookings',{
-                bookingType: "TRANSPORT",
-                fromDate: moment(fromValue).format('DD-MMM-YYYY'),
-                toDate: moment(toValue).format('DD-MMM-YYYY'),
-            }, headers);
-            response && setData(response);
-        }
-        fromValue!==0 && toValue !== 0 && fetchDataChange();
-    },[fromValue, toValue, headers]);
-
-    useEffect(() => {
-        const fetchDataChange = async () => {
             setLoading(true);
             setError({
                 error: false,
