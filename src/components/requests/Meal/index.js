@@ -80,8 +80,8 @@ const Meal = () => {
                     </div>
                 </div>
                 {loading && <LoadingShimmer />}
-                <div className="table-container">
-                    {!loading && !error.error && data && data.data && data.data.data && data.data.data.mealRecords && data.data.data.mealRecords.length > 0 ? <div className="table seats">
+                {!loading && !error.error && <div className="table-container">
+                    {data && data.data && data.data.data && data.data.data.mealRecords && data.data.data.mealRecords.length > 0 ? <div className="table seats">
                         <div className="heading row">
                             <p>Name</p>
                             <p>Email Address</p>
@@ -97,7 +97,7 @@ const Meal = () => {
                             </div>
                         ))}
                     </div> : <div className="nodata">No data found</div>}
-                </div>
+                </div>}
                 {error.error && <div className="nodata">An error occured in fetching data : {error.message}</div>}
             </div>
         </div>
